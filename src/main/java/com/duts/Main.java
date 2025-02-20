@@ -11,6 +11,7 @@ public class Main {
 
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
+        gamePanel.startGameThread();
 
         window.pack();
         window.setLocationRelativeTo(null);
