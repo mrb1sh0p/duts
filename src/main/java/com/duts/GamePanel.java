@@ -14,6 +14,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     Player player;
     Thread gameThread;
     boolean gameRunning = true;
+    double delta = 0;
 
     boolean upPressed, downPressed, leftPressed, rightPressed;
 
@@ -48,10 +49,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     public void run() {
         double drawInterval = 1000000000 / FPS;
         double nextDrawTime = System.nanoTime() + drawInterval;
+        long lastTime = System.nanoTime();
+        long currentTime;
 
         while (gameThread != null) {
             update();
             repaint();
+            currentTime = System.nanoTime();
+            delta += (currentTime - lastTime) / drawInterval;
 
             try {
                 double remainingTime = (nextDrawTime - System.nanoTime()) / 1000000;
@@ -60,6 +65,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
                 Thread.sleep((long) remainingTime);
                 nextDrawTime += drawInterval;
+
+                if (delta >= 1) {
+                    update(); // Atualiza a lógica do jogo
+                    repaint(); // Redesenha a tela
+                    delta--;
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -71,7 +82,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     public void update() {
-        // Atualizações de lógica do jogo aqui
+        player.update()
     }
 
     @Override
@@ -107,7 +118,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
         g2.setColor(Color.BLACK);
         g2.fillRect(0, 0, screenWidth, screenHeight);
-        
+
         tileManager.draw(g2);
         player.draw(g2);
     }
