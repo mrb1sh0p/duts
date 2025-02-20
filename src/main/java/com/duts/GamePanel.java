@@ -48,15 +48,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     public void run() {
         double drawInterval = 1000000000 / FPS;
         double nextDrawTime = System.nanoTime() + drawInterval;
-        double delta = 0;
-        long lastTime = System.nanoTime();
-        long currentTime;
 
         while (gameThread != null) {
             update();
             repaint();
-            currentTime = System.nanoTime();
-            delta += (currentTime - lastTime) / drawInterval;
 
             try {
                 double remainingTime = (nextDrawTime - System.nanoTime()) / 1000000;
@@ -65,12 +60,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
                 Thread.sleep((long) remainingTime);
                 nextDrawTime += drawInterval;
-
-                if (delta >= 1) {
-                    update(); // Atualiza a lógica do jogo
-                    repaint(); // Redesenha a tela
-                    delta--;
-                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
