@@ -14,7 +14,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     Player player;
     Thread gameThread;
     boolean gameRunning = true;
-    double delta = 0;
 
     boolean upPressed, downPressed, leftPressed, rightPressed;
 
@@ -49,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     public void run() {
         double drawInterval = 1000000000 / FPS;
         double nextDrawTime = System.nanoTime() + drawInterval;
+        double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
 
@@ -82,7 +82,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     public void update() {
-        player.update()
+        player.update();
     }
 
     @Override

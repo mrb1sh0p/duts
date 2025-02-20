@@ -7,7 +7,7 @@ public class Main {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setTitle("Meu RPG 2D");
+        window.setTitle("Duts");
 
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);

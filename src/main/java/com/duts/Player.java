@@ -20,15 +20,15 @@ public class Player {
      * 
      * @param deltaTime tempo desde o último frame para cálculo de movimento suave
      */
-    public void update(double deltaTime) {
+    public void update() {
         if (gamePanel.upPressed)
-            y -= speed * deltaTime;
+            y -= speed;
         if (gamePanel.downPressed)
-            y += speed * deltaTime;
+            y += speed;
         if (gamePanel.leftPressed)
-            x -= speed * deltaTime;
+            x -= speed;
         if (gamePanel.rightPressed)
-            x += speed * deltaTime;
+            x += speed;
     }
 
     public void draw(Graphics2D g2) {
