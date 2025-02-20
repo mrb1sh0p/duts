@@ -10,11 +10,16 @@ public class Player {
 
     public Player(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        x = 100;
-        y = 100;
+        x = 20;
+        y = 20;
         speed = 4;
     }
 
+    /**
+     * Atualiza a posição do jogador baseado nas teclas pressionadas
+     * 
+     * @param deltaTime tempo desde o último frame para cálculo de movimento suave
+     */
     public void update(double deltaTime) {
         if (gamePanel.upPressed)
             y -= speed * deltaTime;

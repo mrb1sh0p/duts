@@ -9,6 +9,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
+    private TileManager tileManager;
+
     Player player;
     Thread gameThread;
     boolean gameRunning = true;
@@ -33,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         this.addKeyListener(this);
-
+        tileManager = new TileManager(this);
     }
 
     // iniciar o thread
@@ -105,7 +107,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
         g2.setColor(Color.BLACK);
         g2.fillRect(0, 0, screenWidth, screenHeight);
-
+        
+        tileManager.draw(g2);
         player.draw(g2);
     }
 }
