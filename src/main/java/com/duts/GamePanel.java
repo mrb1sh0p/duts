@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
     private TileManager tileManager;
-
+    private CollisionChecker collisionChecker;
     Player player;
     Thread gameThread;
     boolean gameRunning = true;
@@ -30,7 +30,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     final int screenHeight = tileSize * maxScreenRow; // 768 pixels
 
     public GamePanel() {
-        this.player = new Player(this);
+        this.tileManager = new TileManager(this);
+        this.collisionChecker = new CollisionChecker(tileManager, this);
+        this.player = new Player(this, collisionChecker);
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setDoubleBuffered(true);
         this.setFocusable(true);
@@ -71,7 +73,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     public void update() {
-        player.update();
+        player.update(upPressed, downPressed, leftPressed, rightPressed);
     }
 
     @Override

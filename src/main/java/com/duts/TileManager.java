@@ -13,6 +13,7 @@ public class TileManager {
 
     /**
      * Construtor do TileManager.
+     * 
      * @param gamePanel Referência ao GamePanel para acessar configurações.
      */
     public TileManager(GamePanel gamePanel) {
@@ -30,13 +31,13 @@ public class TileManager {
         try {
             // Tile 0: Grama (sem colisão)
             tiles[0] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png")), false, gamePanel);
-            
+
             // Tile 1: Parede (com colisão)
             tiles[1] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tiles/wall.png")), true, gamePanel);
-            
+
             // Tile 2: Água (com colisão)
             tiles[2] = new Tile(ImageIO.read(getClass().getResourceAsStream("/tiles/water.png")), true, gamePanel);
-            
+
             // Adicione mais tiles conforme necessário
         } catch (Exception e) {
             e.printStackTrace();
@@ -45,6 +46,7 @@ public class TileManager {
 
     /**
      * Carrega o mapa a partir de um arquivo de texto.
+     * 
      * @param filePath Caminho do arquivo de mapa.
      */
     private void loadMap(String filePath) {
@@ -76,6 +78,7 @@ public class TileManager {
 
     /**
      * Desenha o mapa na tela.
+     * 
      * @param g2 Objeto Graphics2D usado para desenhar.
      */
     public void draw(Graphics2D g2) {
@@ -95,5 +98,21 @@ public class TileManager {
                 row++;
             }
         }
+    }
+    
+    public int getMaxScreenCol() {
+        return gamePanel.maxScreenCol;
+    }
+
+    public int getMaxScreenRow() {
+        return gamePanel.maxScreenRow;
+    }
+
+    public int getMapTileNumber(int col, int row) {
+        return mapTileNumbers[col][row];
+    }
+
+    public Tile getTile(int index) {
+        return tiles[index];
     }
 }
